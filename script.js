@@ -106,7 +106,7 @@ clearButton.addEventListener("click", () => {
 })
 
 decimalButton.addEventListener("click", () => {
-  if(currentNumber == 0 || currentNumber == null && decimalPressed == true) {
+  if((currentNumber == 0 || currentNumber == null) && decimalPressed == true) {
     currentNumber = 0;
     displayNumber = "0";
     displayNumber += decimalButton.value;
