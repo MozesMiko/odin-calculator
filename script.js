@@ -14,10 +14,14 @@ const operators = document.querySelectorAll(".operator");
 const clearButton = document.querySelector("#btn-clear");
 const evaluateButton = document.querySelector("#btn-equals");
 const decimalButton = document.querySelector(".decimal");
+const plusMinusButton = document.querySelector("#btn-plus-minus")
 
 for(let i = 0; i < numbers.length; i++) {
   const numberButton = numbers[i];
   numberButton.addEventListener("click", () => {
+    if(storedNumber != null && operator == null) {
+      storedNumber = null;
+    }
     if(displayNumber == "0") {
       displayNumber = "";
       displayNumber += numberButton.value;
@@ -37,12 +41,14 @@ for(let i = 0; i < operators.length; i++) {
   const operatorButton = operators[i];
   operatorButton.addEventListener("click", () => {
     if(storedNumber == null) {
+      decimalPressed = false;
       storedNumber = currentNumber;
       displayNumber = "";
       operator = operatorButton.value;
       currentNumber = null;
       printShit();
     } else {
+      decimalPressed= false;
       displayNumber = "";
       operate(storedNumber, operator, currentNumber);
       storedNumber = result;
@@ -89,6 +95,7 @@ evaluateButton.addEventListener("click", () => {
   storedNumber = result;
   operator = null;
   displayNumber = "";
+  decimalPressed = false;
   printShit();
 })
 
@@ -100,14 +107,15 @@ clearButton.addEventListener("click", () => {
   operator = null;
   equation.innerText = "";
   display.innerText = "0";
+  decimalPressed = false;
+  result = null;
   // while (highlighted.length > 0) {
   //   highlighted[0].classList.remove("highlight");
   // }
 })
 
 decimalButton.addEventListener("click", () => {
-  if((currentNumber == 0 || currentNumber == null) && decimalPressed == true) {
-    currentNumber = 0;
+  if((currentNumber == 0 || currentNumber == null) && decimalPressed == false) {
     displayNumber = "0";
     displayNumber += decimalButton.value;
     currentNumber = Number(displayNumber);
@@ -121,10 +129,24 @@ decimalButton.addEventListener("click", () => {
   }
 })
 
+plusMinusButton.addEventListener("click", () => {
+  if(displayNumber != "0" && displayNumber != null) {
+    if(!displayNumber.includes("-")) {
+      displayNumber = "-" + displayNumber;
+      display.innerText = displayNumber;
+      currentNumber = Number(displayNumber);
+    } else {
+      displayNumber = displayNumber.slice(1);
+      display.innerText = displayNumber;
+      currentNumber = Number(displayNumber);
+    }
+  }
+})
+
 const printShit = function() {
   // console.log("CurrentNumber is : " + currentNumber);
   // console.log("StoredNumber is : " + storedNumber);
   // console.log("displayNumber is : " + displayNumber);
-  console.log("Equation is: " + storedNumber + " " 
-              + operator + " " + currentNumber);
+  console.log("Equation is: " + "storedNumber: " + storedNumber + " " 
+              + operator + " " + "currentNumber: " + currentNumber);
 }
