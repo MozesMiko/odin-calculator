@@ -4,6 +4,7 @@ let storedNumber = null;
 let operator = null;
 let result;
 let decimalPressed = false;
+let percentPressed = false;
 
 const display = document.querySelector("#currentDisplay");
 display.innerText = displayNumber;
@@ -14,11 +15,15 @@ const operators = document.querySelectorAll(".operator");
 const clearButton = document.querySelector("#btn-clear");
 const evaluateButton = document.querySelector("#btn-equals");
 const decimalButton = document.querySelector(".decimal");
-const plusMinusButton = document.querySelector("#btn-plus-minus")
+const plusMinusButton = document.querySelector("#btn-plus-minus");
+const percentageButton = document.querySelector("#btn-percent");
 
 for(let i = 0; i < numbers.length; i++) {
   const numberButton = numbers[i];
   numberButton.addEventListener("click", () => {
+    if(percentPressed == true && storedNumber != null && currentNumber != null) {
+      return;
+    }
     if(storedNumber != null && operator == null) {
       storedNumber = null;
     }
@@ -80,6 +85,7 @@ const operate = function(num1, operator, num2) {
         }
         break;
     }
+    percentPressed = false;
     return result;
   } else {
     console.error("Cannor operate with null")
@@ -108,6 +114,7 @@ clearButton.addEventListener("click", () => {
   equation.innerText = "";
   display.innerText = "0";
   decimalPressed = false;
+  percentPressed = false;
   result = null;
   // while (highlighted.length > 0) {
   //   highlighted[0].classList.remove("highlight");
@@ -141,6 +148,25 @@ plusMinusButton.addEventListener("click", () => {
       currentNumber = Number(displayNumber);
     }
   }
+})
+
+percentageButton.addEventListener("click", () => {
+  if(percentPressed == true) {
+     return;
+  }
+  if(currentNumber != null && storedNumber == null) {
+    let tempNumber = 0;
+    result = currentNumber / 100;
+    displayNumber = result.toString();
+    display.innerText = displayNumber;
+    currentNumber = result;
+  } else if(currentNumber != null && storedNumber != null) {
+    displayNumber += percentageButton.value;
+    display.innerText = displayNumber;
+    tempNumber = Number(displayNumber.slice(0, -1));
+    currentNumber = storedNumber * (tempNumber / 100);
+  }
+  percentPressed = true;
 })
 
 const printShit = function() {
