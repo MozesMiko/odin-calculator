@@ -3,6 +3,7 @@ let currentNumber = null;
 let storedNumber = null;
 let operator = null;
 let result;
+let decimalPressed = false;
 
 const display = document.querySelector("#currentDisplay");
 display.innerText = displayNumber;
@@ -11,7 +12,8 @@ const numbers = document.querySelectorAll(".operand");
 const operators = document.querySelectorAll(".operator");
 
 const clearButton = document.querySelector("#btn-clear");
-const evaluateButton = document.querySelector("#btn-equals")
+const evaluateButton = document.querySelector("#btn-equals");
+const decimalButton = document.querySelector(".decimal");
 
 for(let i = 0; i < numbers.length; i++) {
   const numberButton = numbers[i];
@@ -101,6 +103,22 @@ clearButton.addEventListener("click", () => {
   // while (highlighted.length > 0) {
   //   highlighted[0].classList.remove("highlight");
   // }
+})
+
+decimalButton.addEventListener("click", () => {
+  if(currentNumber == 0 || currentNumber == null && decimalPressed == true) {
+    currentNumber = 0;
+    displayNumber = "0";
+    displayNumber += decimalButton.value;
+    currentNumber = Number(displayNumber);
+    decimalPressed = true;
+    display.innerText = displayNumber;
+  } else if(decimalPressed == false) {
+    displayNumber += decimalButton.value;
+    currentNumber = Number(displayNumber);
+    decimalPressed = true;
+    display.innerText = displayNumber;
+  }
 })
 
 const printShit = function() {
