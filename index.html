@@ -12,27 +12,30 @@
 <body>
   <h1>Calculator</h1>
   <div id="calculator-body">
-    <div id="display">123456789</div>
+    <div id="display">
+      <div id="equation"></div>
+      <div id="currentDisplay">123456789</div>
+    </div>
     <div id="buttons">
-      <button class="additional" id="clear">Clear</button>
-      <button class="additional" id="plus-minus">+/-</button>
-      <button class="additional" id="percent">%</button>
-      <button class="operator" id="divide">/</button>
-      <button class="operand" id="btn-7">7</button>
-      <button class="operand" id="btn-8">8</button>
-      <button class="operand" id="btn-9">9</button>
-      <button class="operator" id="multiply">*</button>
-      <button class="operand" id="btn-4">4</button>
-      <button class="operand" id="btn-5">5</button>
-      <button class="operand" id="btn-6">6</button>
-      <button class="operator" id="substract">-</button>
-      <button class="operand" id="btn-1">1</button>
-      <button class="operand" id="btn-2">2</button>
-      <button class="operand" id="btn-3">3</button>
-      <button class="operator" id="add">+</button>
-      <button class="operand" id="btn-0">0</button>
-      <button class="operand" id="decimal">.</button>
-      <button class="operator" id="evaluate">=</button>
+      <button class="clear" id="btn-clear">Clear</button>
+      <button class="additional" id="btn-plus-minus" value="+">+/-</button>
+      <button class="additional" id="btn-percent">%</button>
+      <button class="operator" id="btn-divide" value="/">/</button>
+      <button class="operand" id="btn-7" value="7">7</button>
+      <button class="operand" id="btn-8" value="8">8</button>
+      <button class="operand" id="btn-9" value="9">9</button>
+      <button class="operator" id="btn-multiply"  value="*">*</button>
+      <button class="operand" id="btn-4" value="4">4</button>
+      <button class="operand" id="btn-5" value="5">5</button>
+      <button class="operand" id="btn-6" value="6">6</button>
+      <button class="operator" id="btn-substract" value="-">-</button>
+      <button class="operand" id="btn-1" value="1">1</button>
+      <button class="operand" id="btn-2" value="2">2</button>
+      <button class="operand" id="btn-3" value="3">3</button>
+      <button class="operator" id="btn-add" value="+">+</button>
+      <button class="operand" id="btn-0" value="0">0</button>
+      <button class="decimal" id="btn-decimal" value=".">.</button>
+      <button class="evaluate" id="btn-equals" value="=">=</button>
     </div>
   </div>
   <script src="script.js"></script>
