@@ -32,12 +32,18 @@ for(let i = 0; i < numbers.length; i++) {
       displayNumber += numberButton.value;
       display.innerText = displayNumber;
       currentNumber = Number(displayNumber);
-      printShit();
+      var highlighted = document.getElementsByClassName("highlight");
+      while (highlighted.length > 0) {
+        highlighted[0].classList.remove("highlight");
+      }
     } else {
       displayNumber += numberButton.value;
       display.innerText = displayNumber;
       currentNumber = Number(displayNumber);
-      printShit();
+      var highlighted = document.getElementsByClassName("highlight");
+      while (highlighted.length > 0) {
+        highlighted[0].classList.remove("highlight");
+      }
     }
   })
 }
@@ -45,14 +51,21 @@ for(let i = 0; i < numbers.length; i++) {
 for(let i = 0; i < operators.length; i++) {
   const operatorButton = operators[i];
   operatorButton.addEventListener("click", () => {
+    for (let j = 0; j < operators.length; j++) {
+      operators[j].classList.remove("highlight");
+    }
+    operatorButton.classList.add("highlight");
     if(storedNumber == null) {
       decimalPressed = false;
       storedNumber = currentNumber;
       displayNumber = "";
       operator = operatorButton.value;
       currentNumber = null;
-      printShit();
+    } else  if(currentNumber == null) {
+      operator = operatorButton.value;
+      operatorButton.classList.add("highlight");
     } else {
+      operatorButton.classList.add("highlight");
       decimalPressed= false;
       displayNumber = "";
       operate(storedNumber, operator, currentNumber);
@@ -60,7 +73,6 @@ for(let i = 0; i < operators.length; i++) {
       currentNumber = null;
       display.innerText = storedNumber;
       operator = operatorButton.value;
-      printShit();
     }
   })
 }
@@ -86,6 +98,9 @@ const operate = function(num1, operator, num2) {
         break;
     }
     percentPressed = false;
+    if (typeof result === "number") {
+      result = roundResult(result);
+    }
     return result;
   } else {
     console.error("Cannor operate with null")
@@ -102,7 +117,6 @@ evaluateButton.addEventListener("click", () => {
   operator = null;
   displayNumber = "";
   decimalPressed = false;
-  printShit();
 })
 
 clearButton.addEventListener("click", () => {
@@ -116,6 +130,10 @@ clearButton.addEventListener("click", () => {
   decimalPressed = false;
   percentPressed = false;
   result = null;
+  var highlighted = document.getElementsByClassName("highlight");
+  while (highlighted.length > 0) {
+    highlighted[0].classList.remove("highlight");
+  }
   // while (highlighted.length > 0) {
   //   highlighted[0].classList.remove("highlight");
   // }
@@ -169,10 +187,12 @@ percentageButton.addEventListener("click", () => {
   percentPressed = true;
 })
 
-const printShit = function() {
-  // console.log("CurrentNumber is : " + currentNumber);
-  // console.log("StoredNumber is : " + storedNumber);
-  // console.log("displayNumber is : " + displayNumber);
-  console.log("Equation is: " + "storedNumber: " + storedNumber + " " 
-              + operator + " " + "currentNumber: " + currentNumber);
+const roundResult = function(number) {
+  if(Number.isNaN(number)) {
+    return NaN;
+  } else if(!Number.isInteger(number)) {
+    return Number(number.toFixed(4));
+  } else {
+    return number;
+  }
 }

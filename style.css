@@ -1,10 +1,15 @@
 body{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   background-color: lightblue;
 }
 
 #calculator-body {
   background-color: orangered;
-  margin: auto;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   max-width: 400px;
@@ -44,13 +49,16 @@ button {
   border-radius: 4px;
   border: none;
   box-sizing: border-box;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 500;
+  font-size: 24px;
 }
 
 #btn-0{
   flex-basis: calc(50% - 5px);
 }
 
-.operand {
+.operand, .decimal {
   background-color: lightblue;
 }
 
