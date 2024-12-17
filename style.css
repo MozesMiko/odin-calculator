@@ -82,3 +82,7 @@ button {
 #currentDisplay {
   font-size: 24px;
 }
+
+#equation {
+  min-height: 1.5em;
+}

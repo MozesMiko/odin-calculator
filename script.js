@@ -18,6 +18,8 @@ const decimalButton = document.querySelector(".decimal");
 const plusMinusButton = document.querySelector("#btn-plus-minus");
 const percentageButton = document.querySelector("#btn-percent");
 
+const equationDisplay = document.querySelector("#equation");
+
 for(let i = 0; i < numbers.length; i++) {
   const numberButton = numbers[i];
   numberButton.addEventListener("click", () => {
@@ -61,9 +63,11 @@ for(let i = 0; i < operators.length; i++) {
       displayNumber = "";
       operator = operatorButton.value;
       currentNumber = null;
+      equation.innerText = storedNumber + " " + operator;
     } else  if(currentNumber == null) {
       operator = operatorButton.value;
       operatorButton.classList.add("highlight");
+      equation.innerText = storedNumber + " " + operator;
     } else {
       operatorButton.classList.add("highlight");
       decimalPressed= false;
@@ -73,6 +77,7 @@ for(let i = 0; i < operators.length; i++) {
       currentNumber = null;
       display.innerText = storedNumber;
       operator = operatorButton.value;
+      equation.innerText =result + " " + operator;
     }
   })
 }
@@ -108,19 +113,21 @@ const operate = function(num1, operator, num2) {
 }
 
 evaluateButton.addEventListener("click", () => {
-  operate(storedNumber, operator, currentNumber);
-  displayNumber = result.toString();
-  display.innerText = displayNumber;
-  // equation.innerText = storedNumber + " " + operator + " " + currentNumber + " =";
-  currentNumber = null;
-  storedNumber = result;
-  operator = null;
-  displayNumber = "";
-  decimalPressed = false;
-})
+  if (storedNumber !== null && currentNumber !== null) {
+    operate(storedNumber, operator, currentNumber);
+    displayNumber = result.toString();
+    display.innerText = displayNumber;
+    equationDisplay.innerText = `${storedNumber} ${operator} ${currentNumber} =`;
+    storedNumber = result;
+    currentNumber = null;
+    operator = null;
+    displayNumber = "";
+    decimalPressed = false;
+  }
+});
+
 
 clearButton.addEventListener("click", () => {
-  // var highlighted = document.getElementsByClassName("highlight");
   currentNumber = 0;
   displayNumber = "0";
   storedNumber = null;
@@ -130,13 +137,11 @@ clearButton.addEventListener("click", () => {
   decimalPressed = false;
   percentPressed = false;
   result = null;
+  equation.innerText = "";
   var highlighted = document.getElementsByClassName("highlight");
   while (highlighted.length > 0) {
     highlighted[0].classList.remove("highlight");
   }
-  // while (highlighted.length > 0) {
-  //   highlighted[0].classList.remove("highlight");
-  // }
 })
 
 decimalButton.addEventListener("click", () => {
