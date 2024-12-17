@@ -4,17 +4,17 @@ body{
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: lightblue;
+  background-color: #214660;
 }
 
 #calculator-body {
-  background-color: orangered;
+  background-color: #0B1720;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   max-width: 400px;
   height: 400px;
-  border-radius: 8px;
+  border-radius: 12px;
   padding: 8px;
   gap: 8px;
 }
@@ -31,7 +31,7 @@ body{
   padding: 8px 16px;
   font-weight: 600;
   font-family: "Quicksand", sans-serif;
-  border-radius: 4px;
+  border-radius: 8px;
 }
 
 #buttons {
@@ -46,7 +46,7 @@ body{
 
 button {
   flex: 1 calc(25% - 6px);
-  border-radius: 4px;
+  border-radius: 8px;
   border: none;
   box-sizing: border-box;
   font-family: "Quicksand", sans-serif;
@@ -54,24 +54,28 @@ button {
   font-size: 24px;
 }
 
-#btn-0{
+#btn-0 {
   flex-basis: calc(50% - 5px);
 }
 
 .operand, .decimal {
-  background-color: lightblue;
+  background-color: #3E8BC2;
 }
 
 .additional {
   background-color: lightgoldenrodyellow;
 }
 
-.operator {
-  background-color: lightpink;
+.operator, .evaluate {
+  background-color: #2B5D80;
+}
+
+.additional, .clear {
+  background-color: #3474A1;
 }
 
 .highlight {
-  background-color: brown;
+  background-color: #162F40;
 }
 
 #equation {

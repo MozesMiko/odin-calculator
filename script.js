@@ -20,6 +20,8 @@ const percentageButton = document.querySelector("#btn-percent");
 
 const equationDisplay = document.querySelector("#equation");
 
+const maxDigits = 16;
+
 for(let i = 0; i < numbers.length; i++) {
   const numberButton = numbers[i];
   numberButton.addEventListener("click", () => {
@@ -29,22 +31,24 @@ for(let i = 0; i < numbers.length; i++) {
     if(storedNumber != null && operator == null) {
       storedNumber = null;
     }
-    if(displayNumber == "0") {
-      displayNumber = "";
-      displayNumber += numberButton.value;
-      display.innerText = displayNumber;
-      currentNumber = Number(displayNumber);
-      var highlighted = document.getElementsByClassName("highlight");
-      while (highlighted.length > 0) {
-        highlighted[0].classList.remove("highlight");
-      }
-    } else {
-      displayNumber += numberButton.value;
-      display.innerText = displayNumber;
-      currentNumber = Number(displayNumber);
-      var highlighted = document.getElementsByClassName("highlight");
-      while (highlighted.length > 0) {
-        highlighted[0].classList.remove("highlight");
+    if(displayNumber.length < maxDigits) {
+      if(displayNumber == "0") {
+        displayNumber = "";
+        displayNumber += numberButton.value;
+        display.innerText = displayNumber;
+        currentNumber = Number(displayNumber);
+        var highlighted = document.getElementsByClassName("highlight");
+        while (highlighted.length > 0) {
+          highlighted[0].classList.remove("highlight");
+        }
+      } else {
+        displayNumber += numberButton.value;
+        display.innerText = displayNumber;
+        currentNumber = Number(displayNumber);
+        var highlighted = document.getElementsByClassName("highlight");
+        while (highlighted.length > 0) {
+          highlighted[0].classList.remove("highlight");
+        }
       }
     }
   })
